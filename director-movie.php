@@ -1,4 +1,4 @@
-<h3>Add Actor Roles in Movies</h3>
+<h3>Add Directors of Movies</h3>
 
 <?php
   function console_log( $data ){
@@ -6,8 +6,8 @@
     echo 'console.log('. json_encode( $data ) .')';
     echo '</script>';
   }
-  // Populate dropdown with existing actors and movies
-  $get_actors = "SELECT DISTINCT id, first, last, dob FROM Actor ORDER BY first ASC";
+  // Populate dropdown with existing directors and movies
+  $get_directors = "SELECT DISTINCT id, first, last, dob FROM Director ORDER BY first ASC";
   $get_movies = "SELECT DISTINCT id, title, year FROM Movie ORDER BY title ASC";
 
   // Connect to db
@@ -20,8 +20,8 @@
   }
 
   // Run queries
-  if ($actors_rs = $db->query($get_actors)) {
-    console_log("Get actors success");
+  if ($directors_rs = $db->query($get_directors)) {
+    console_log("Get directors success");
   }
   if ($movies_rs = $db->query($get_movies)) {
     console_log("Get movies success");
@@ -31,18 +31,18 @@
 ?>
 
 <form method='GET' action="<?php $_PHP_SELF ?>">
-  Actor:
-    <select name="actor">
+  Director:
+    <select name="director">
       <option value=" "></option>
       <?php
-        // Populate dropdown with existing actors
-        if ($actors_rs) {
+        // Populate dropdown with existing directors
+        if ($directors_rs) {
           // Echo each result as a select option
-          while ($row = $actors_rs->fetch_assoc()) {
+          while ($row = $directors_rs->fetch_assoc()) {
             echo "<option value='{$row["id"]}'>{$row['first']} {$row['last']} ({$row["dob"]})</option>";
           }
         }
-        $actors_rs->free();
+        $directors_rs->free();
       ?>
     </select>
   <br />
@@ -60,15 +60,13 @@
         $movies_rs->free();
       ?>
     </select>
-  <br />
-  Role: <input type="text" name="role" />
   <input type="submit" value="Submit"/>
 </form>
 
 <?php
   $required_present = true;
   // Check all required fields are entered
-  $check_array = array('actor', 'movie', 'role');
+  $check_array = array('director', 'movie');
   foreach($check_array as $key) {
     if (!isset($_GET[$key])) {
       // TODO: Some kind of error message if not all required fields entered.
@@ -91,21 +89,19 @@
     }
 
     // Prepare statement
-    $statement = $db->prepare("INSERT INTO MovieActor VALUES(?, ?, ?)");
-    $rs = $statement->bind_param("iis", $_GET['movie'], $_GET['actor'], $_GET['role']);
+    $statement = $db->prepare("INSERT INTO MovieDirector VALUES(?, ?)");
+    $rs = $statement->bind_param("ii", $_GET['movie'], $_GET['director']);
 
     $test_execute = false;
 
     // Execute statement
     if ($test_execute && $statement->execute()) {
-      console_log("Insert MovieActor Success");
+      console_log("Insert MovieDirector Success");
     }
     else {
-      console_log("Failed to insert to MovieActor");
+      console_log("Failed to insert to MovieDirector");
     }
     // Close connection
     $db->close();
   }
 ?>
-
-
