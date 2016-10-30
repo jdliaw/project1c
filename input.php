@@ -54,7 +54,6 @@
     // Get next id from MaxPersonID
     $id_query = "SELECT id FROM MaxPersonID";
     $id = $db->query($id_query)->fetch_assoc()['id'] + 1;
-    console_log("id time");
     console_log($id);
 
     // Prepare INSERT statement and bind params
@@ -66,8 +65,6 @@
       $statement = $db->prepare("INSERT INTO Director VALUES(?, ?, ?, ?, ?)");
       $rs = $statement->bind_param('isssss', $id, $_GET['first'], $_GET['last'], $_GET['dob'], $dod); // No sex for Director
     }
-    console_log("after bind");
-    console_log($rs);
 
     $test_execute = false;
 
