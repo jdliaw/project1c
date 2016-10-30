@@ -38,7 +38,7 @@
         if ($actors_rs) {
           // Echo each result as a select option
           while ($row = $actors_rs->fetch_assoc()) {
-            echo "<option value='".$row["id"]."'>".$row['first']." ".$row['last']." (".$row["dob"].")</option>";
+            echo "<option value='{$row["id"]}'>{$row['first']} {$row['last']} ({$row["dob"]})</option>";
           }
         }
         $actors_rs->free();
@@ -52,7 +52,7 @@
         if ($movies_rs) {
           // Echo each result as a select option
           while ($row = $movies_rs->fetch_assoc()) {
-            echo "<option value='".$row["id"]."'>".$row["title"]." (".$row["year"].")</option>";
+            echo "<option value='{$row["id"]}'>{$row["title"]} ({$row["year"]})</option>";
           }
         }
         $movies_rs->free();
