@@ -23,8 +23,16 @@
     if ($db->connect_errno > 0) {
       die('Unable to connect to database [' . $db->connect_error . ']');
     }
+    $queries = explode(" ", $search);
+    if(count($queries) == 2) {
+      $query = "SELECT first, last, dob FROM Actor WHERE (first LIKE '%$queries[0]%' AND last LIKE '%$queries[1]%') OR first LIKE '%$queries[1]%' AND last LIKE '%$queries[0]%'";
+      // $query = "SELECT first, last, dob FROM Actor WHERE first LIKE '%$queries[1]%' AND last LIKE '%$queries[0]%'";
+    }
+    else {
+      $query = "SELECT first, last, dob FROM Actor WHERE first LIKE '%$search%' OR last LIKE '%$search%'";
+    }
 
-    $query = "SELECT first, last, dob FROM Actor WHERE first LIKE '%$search%' OR last LIKE '%$search%'";
+   
     // Run query
     $rs = $db->query($query);
 
