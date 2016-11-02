@@ -29,7 +29,7 @@ body {
     margin-right: auto;
     margin-left: 10px;
   }
-  a {
+  nav a {
     color: white;
     font-size: 20px;
     text-decoration: none;
@@ -59,4 +59,12 @@ body {
   font-size: 15px;
   padding: 5px 15px;
   display: block;
+}
+
+table {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
 }

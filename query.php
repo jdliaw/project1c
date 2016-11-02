@@ -28,6 +28,7 @@
 
 <?php
   if ($_GET["search"]) {
+    echo "<div class='container'>";
     // Get query from textarea
     $search = $_GET["search"];
     echo "<p>Your search: ". $search ."</p>";
@@ -141,6 +142,8 @@
     }
 
     echo "</table>";
+
+    echo "</div>";
 
   }
 
