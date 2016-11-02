@@ -23,16 +23,22 @@
     if ($db->connect_errno > 0) {
       die('Unable to connect to database [' . $db->connect_error . ']');
     }
+
+    /*
+    The code below searches for Actors. Handles a space as an AND relation.
+    */
+
+    //Use the search to form a query, and handle spaces as 'AND' relation.
     $queries = explode(" ", $search);
+    //If the array size is 2, that means there are two spaces so we can handle as an AND relation.
     if(count($queries) == 2) {
       $query = "SELECT first, last, dob FROM Actor WHERE (first LIKE '%$queries[0]%' AND last LIKE '%$queries[1]%') OR first LIKE '%$queries[1]%' AND last LIKE '%$queries[0]%'";
-      // $query = "SELECT first, last, dob FROM Actor WHERE first LIKE '%$queries[1]%' AND last LIKE '%$queries[0]%'";
     }
+    //Array size is 1, that means we can run a regular query. Alternatively, if it's greater than 2, then given our actors, we cannot have 2 space in a name.
     else {
       $query = "SELECT first, last, dob FROM Actor WHERE first LIKE '%$search%' OR last LIKE '%$search%'";
     }
 
-   
     // Run query
     $rs = $db->query($query);
 
@@ -66,6 +72,9 @@
 
     echo "</table>";
 
+    /*
+    Now, we have to repeat the same steps for movie queries, except we don't have to bother with spaces being 'AND' relations.
+    */
     //Do this query for movie titles
     echo "<h3>Actors with this first or last name:</h3>";
     echo "<table border=1 cellspacing=1 cellpadding=2>";
