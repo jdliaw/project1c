@@ -1,3 +1,11 @@
+<nav>
+  <div class="navitem left"> <a href="/~cs143/project1c/">Home</a></div>
+  <div class="navitem right"><a class="navbar" href="/~cs143/project1c/">Add New Content</a></div>
+  <div class="navitem right"><a class="navbar" href="/~cs143/project1c/">Browse</a></div>
+  <div class="navitem right"><a class="navbar" href="/~cs143/project1c/">Search Actor/Movie</a></div>
+  
+</nav>
+
 <h1>Query</h1>
 <p>by Jennifer Liaw (004454638) and Brandon Liu (004439799).</p>
 
@@ -7,6 +15,44 @@
   <textarea name="search" value="<?php if(isset($search)) echo $_GET['search']; ?>" cols="60" rows="8"></textarea><br />
   <input type="submit" value="Submit"/>
 </form>
+
+<style>
+  body {
+    margin: 0;
+  }
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    background-color: black;
+    height: 80px;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4ad42), to(#74008c));
+  }
+
+  .navitem {
+    margin: auto 0;
+    height: 60px;
+    line-height: 60px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .navitem:hover {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4ad42), to(#74008c));
+    border-radius: 8px;
+  }
+
+  .left {
+    margin-right: auto;
+    margin-left: 10px;
+  }
+  a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  .right {
+    margin-right: 10px;
+  }
+</style>
 
 <?php
   if ($_GET["search"]) {
