@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+}
+.container {
+  margin: 20px 250px;
+  line-height: 250%;
+}
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    background-color: black;
+    height: 80px;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4ad42), to(#74008c));
+  }
+
+  .navitem {
+    margin: auto 0;
+    height: 60px;
+    line-height: 60px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .navitem:hover {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4ad42), to(#74008c));
+    border-radius: 8px;
+  }
+
+  .left {
+    margin-right: auto;
+    margin-left: 10px;
+  }
+  a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  .right {
+    margin-right: 10px;
+  }
+
+.input {
+  margin: 20px 250px;
+  line-height: 250%;
+}
+
+.text-input {
+  width: 100%;
+  padding: 5px;
+  border: #dbdbdb 0.5px solid;
+  border-radius: 3px;
+}
+
+.button {
+  border: #dbdbdb 0.5px solid;
+  border-radius: 3px;
+  background-color: white;
+  font-family: Helvetica;
+  font-style: bold;
+  font-size: 15px;
+  padding: 5px 15px;
+  display: block;
+}

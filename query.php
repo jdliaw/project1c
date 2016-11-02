@@ -1,76 +1,30 @@
+<link href="query.css" rel="stylesheet">
+
 <nav>
   <div class="navitem left"> <a href="/~cs143/project1c/">Home</a></div>
   <div class="navitem right">
     <div class="navbar dropdown">
       <a class="drop-btn" href="/~cs143/project1c/">Add New Content</a><br />
-      <div class="dropdown-content"></div>
-        <a class="anchora " href="#">Actor Information</a><br />
-        <a class="anchora" href="#">Movie Information</a>
-      </div>
     </div>
   </div>
   <div class="navitem right">
-    <a class="navbar" href="/~cs143/project1c/">Browse</a>
-  </div>
-  <div class="navitem right">
-    <a class="navbar" href="/~cs143/project1c/">Search Actor/Movie</a>
+    <a class="navbar" href="/~cs143/project1c/query.php">Search Actor/Movie</a>
   </div>
   
 </nav>
 
-<h1>Query</h1>
-<p>by Jennifer Liaw (004454638) and Brandon Liu (004439799).</p>
+<div class="container">
+  <h1>Query</h1>
+  <p>by Jennifer Liaw (004454638) and Brandon Liu (004439799).</p>
 
-<p>Enter your search:</p>
+  <p>Enter your search:</p>
 
-<form method="GET" action="<?php $_PHP_SELF ?>">
-  <input name="search" value="<?php if(isset($search)) echo $_GET['search']; ?>"><br />
-  <input type="submit" value="Submit"/>
-</form>
+  <form method="GET" action="<?php $_PHP_SELF ?>">
+    <input class="text-input" name="search" value="<?php if(isset($search)) echo $_GET['search']; ?>"><br />
+    <input class="button" type="submit" value="Submit"/>
+  </form>
+</div>
 
-<style>
-  body {
-    margin: 0;
-  }
-  nav {
-    display: flex;
-    justify-content: flex-end;
-    background-color: black;
-    height: 80px;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4ad42), to(#74008c));
-  }
-
-  .navitem {
-    margin: auto 0;
-    height: 60px;
-    line-height: 60px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-  .navitem:hover {
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4ad42), to(#74008c));
-    border-radius: 8px;
-  }
-
-  .left {
-    margin-right: auto;
-    margin-left: 10px;
-  }
-  a {
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
-  }
-  .right {
-    margin-right: 10px;
-  }
-
-  input {
-    border: #dbdbdb 0.5px solid;
-    border-radius: 3px;
-  }
-
-</style>
 
 <?php
   if ($_GET["search"]) {
