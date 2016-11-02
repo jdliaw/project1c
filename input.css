@@ -6,8 +6,13 @@
   color: #e5e5e5;
 }
 
+p {
+  color: #e5e5e5;
+  margin-bottom: 10px;
+}
+
 hr {
-  width: 50%;
+  width: 35%;
 }
 
 button {
