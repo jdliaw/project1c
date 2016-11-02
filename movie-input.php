@@ -1,7 +1,8 @@
-<p>Page to input Movie information</p>
-<a href="input.php">Add Actors/Directors</a>
+<?php
+  include "navbar.php";
+?>
 
-<h3>Movies</h3>
+<h2>Add a Movie.</h2>
 <p>Input movie information.</p>
 
 <form method="GET" action="<?php $_PHP_SELF ?>">
@@ -41,8 +42,6 @@
   <br />
   <input type="submit" value="Submit"/>
 </form>
-
-<hr>
 
 <?php
   function console_log( $data ){

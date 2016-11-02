@@ -1,4 +1,8 @@
-<h3>Add a Movie Review</h3>
+<?php
+  include "navbar.php";
+?>
+
+<h2>Add a Movie Review</h2>
 
 <?php
   function console_log( $data ){
