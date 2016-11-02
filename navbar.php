@@ -1,7 +1,13 @@
-<ul>
-  <li><a href="actor-director.php">Add an Actor/Director.</a><br />
-  <li><a href="movie-input.php">Add a Movie.</a><br />
-  <li><a href="actor-movie.php">Add an Actor/Movie relation.</a><br />
-  <li><a href="director-movie.php">Add a Director/Movie relation.</a><br />
-  <li><a href="movie-review.php">Add a Movie Review.</a><br />
-</ul>
+<link href="navbar.css" rel="stylesheet">
+
+<nav>
+  <div class="navitem left"> <a href="/~cs143/project1c/">Home</a></div>
+  <div class="navitem right">
+    <div class="navbar dropdown">
+      <a class="drop-btn" href="/~cs143/project1c/">Add New Content</a><br />
+    </div>
+  </div>
+  <div class="navitem right">
+    <a class="navbar" href="/~cs143/project1c/query.php">Search Actor/Movie</a>
+  </div>
+</nav>
