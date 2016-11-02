@@ -1,8 +1,20 @@
 <nav>
   <div class="navitem left"> <a href="/~cs143/project1c/">Home</a></div>
-  <div class="navitem right"><a class="navbar" href="/~cs143/project1c/">Add New Content</a></div>
-  <div class="navitem right"><a class="navbar" href="/~cs143/project1c/">Browse</a></div>
-  <div class="navitem right"><a class="navbar" href="/~cs143/project1c/">Search Actor/Movie</a></div>
+  <div class="navitem right">
+    <div class="navbar dropdown">
+      <a class="drop-btn" href="/~cs143/project1c/">Add New Content</a><br />
+      <div class="dropdown-content"></div>
+        <a class="anchora " href="#">Actor Information</a><br />
+        <a class="anchora" href="#">Movie Information</a>
+      </div>
+    </div>
+  </div>
+  <div class="navitem right">
+    <a class="navbar" href="/~cs143/project1c/">Browse</a>
+  </div>
+  <div class="navitem right">
+    <a class="navbar" href="/~cs143/project1c/">Search Actor/Movie</a>
+  </div>
   
 </nav>
 
@@ -12,7 +24,7 @@
 <p>Enter your search:</p>
 
 <form method="GET" action="<?php $_PHP_SELF ?>">
-  <textarea name="search" value="<?php if(isset($search)) echo $_GET['search']; ?>" cols="60" rows="8"></textarea><br />
+  <input name="search" value="<?php if(isset($search)) echo $_GET['search']; ?>"><br />
   <input type="submit" value="Submit"/>
 </form>
 
@@ -52,6 +64,12 @@
   .right {
     margin-right: 10px;
   }
+
+  input {
+    border: #dbdbdb 0.5px solid;
+    border-radius: 3px;
+  }
+
 </style>
 
 <?php
