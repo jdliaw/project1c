@@ -1,8 +1,14 @@
+.home i {
+  color: #e5e5e5;
+  font-size: 30px;
+  margin: 5px 10px;
+}
+
 .title {
   text-align: center;
   font-family: 'Lobster', cursive;
   font-size: 52px;
-  margin-top: 20%;
+  margin-top: 15%;
   color: #e5e5e5;
 }
 

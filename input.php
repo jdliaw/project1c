@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="input.css">
 <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="home">
+  <a href="splash.php"><i class="fa fa-home" aria-hidden="true"></i></a>
+</div>
 
 <div class="container">
   <div class="title">
