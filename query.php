@@ -1,27 +1,16 @@
 <link href="query.css" rel="stylesheet">
 
-<nav>
-  <div class="navitem left"> <a href="/~cs143/project1c/">Home</a></div>
-  <div class="navitem right">
-    <div class="navbar dropdown">
-      <a class="drop-btn" href="/~cs143/project1c/">Add New Content</a><br />
-    </div>
-  </div>
-  <div class="navitem right">
-    <a class="navbar" href="/~cs143/project1c/query.php">Search Actor/Movie</a>
-  </div>
-  
-</nav>
+<?php
+  include "navbar.php"
+?>
 
 <div class="container">
-  <h1>Query</h1>
-  <p>by Jennifer Liaw (004454638) and Brandon Liu (004439799).</p>
+  <h2>Search</h2>
 
-  <p>Enter your search:</p>
-
+  Enter your search:<br />
   <form method="GET" action="<?php $_PHP_SELF ?>">
     <input class="text-input" name="search" value="<?php if(isset($search)) echo $_GET['search']; ?>"><br />
-    <input class="button" type="submit" value="Submit"/>
+    <input class="button" type="submit" value="Click to search!"/>
   </form>
 </div>
 
