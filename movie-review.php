@@ -2,7 +2,11 @@
   include "navbar.php";
 ?>
 
-<h2>Add a Movie Review</h2>
+<link href="add-record.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<div class="input">
+  <h2>Add a Movie Review</h2>
 
 <?php
   function console_log( $data ){
@@ -30,32 +34,34 @@
   $db->close();
 ?>
 
-<form method="GET" action="<?php $_PHP_SELF ?>">
-  Name: <input type="text" name="name" /><br />
-  Movie: <select name="movie">
-    <option value=" "></option>
-      <?php
-        // Populate dropdown with existing movies
-        if ($movies_rs) {
-          // Echo each result as a select option
-          while ($row = $movies_rs->fetch_assoc()) {
-            echo "<option value='{$row["id"]}'>{$row["title"]} ({$row["year"]})</option>";
+  <form method="GET" action="<?php $_PHP_SELF ?>">
+    <b>Name:</b> <input type="text" name="name" class="text-input"/><br />
+    <b>Movie:</b> <br />
+    <select name="movie">
+      <option value=" "></option>
+        <?php
+          // Populate dropdown with existing movies
+          if ($movies_rs) {
+            // Echo each result as a select option
+            while ($row = $movies_rs->fetch_assoc()) {
+              echo "<option value='{$row["id"]}'>{$row["title"]} ({$row["year"]})</option>";
+            }
           }
-        }
-        $movies_rs->free();
-      ?>
-  </select><br />
-  Rating: (out of 5)
-  1 <input type="radio" name="rating" value="1" />
-  2 <input type="radio" name="rating" value="2" />
-  3 <input type="radio" name="rating" value="3" />
-  4 <input type="radio" name="rating" value="4" />
-  5 <input type="radio" name="rating" value="5" />
-  <br />
-  Comment:<br />
-  <textarea name="comment" cols="60" rows="8"></textarea><br />
-  <input type="submit" value="Submit"/>
-</form>
+          $movies_rs->free();
+        ?>
+    </select><br />
+    <b>Rating:</b> (out of 5)<br />
+    1 <input type="radio" name="rating" value="1" />
+    2 <input type="radio" name="rating" value="2" />
+    3 <input type="radio" name="rating" value="3" />
+    4 <input type="radio" name="rating" value="4" />
+    5 <input type="radio" name="rating" value="5" />
+    <br />
+    <b>Comment:</b><br />
+    <textarea name="comment"></textarea><br /><br />
+    <input type="submit" value="Submit" class="button"/>
+  </form>
+</div>
 
 <?php
   $required_present = true;

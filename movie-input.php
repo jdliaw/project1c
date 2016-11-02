@@ -2,46 +2,50 @@
   include "navbar.php";
 ?>
 
-<h2>Add a Movie.</h2>
-<p>Input movie information.</p>
+<link href="add-record.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-<form method="GET" action="<?php $_PHP_SELF ?>">
-  Title: <input type="text" name="title" />
-  Year: <input type="number" name="year" />
-  <br />
-  MPAA rating:
-  <select name="rating">
-    <option value="G">G</option>
-    <option value="NC-17">NC-17</option>
-    <option value="PG">PG</option>
-    <option value="PG-13">PG-13</option>
-    <option value="R">R</option>
-  </select>
-  Company: <input type="text" name="company" />
-  <br />
-  Genre:<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Action" />Action<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Adult" />Adult<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Adventure" />Adventure<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Animation" />Animation<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Comedy" />Comedy<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Crime" />Crime<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Documentary" />Documentary<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Drama" />Drama<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Family" />Family<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Fantasy" />Fantasy<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Horror" />Horror<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Nusical" />Musical<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Nystery" />Mystery<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Romance" />Romance<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Sci-fi" />Sci-Fi<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Short" />Short<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Thriller" />Thriller<br />
-  <input type="checkbox" name="genre[]" id="genre" value="War" />War<br />
-  <input type="checkbox" name="genre[]" id="genre" value="Western" />Western<br />
-  <br />
-  <input type="submit" value="Submit"/>
-</form>
+<div class="input">
+  <h2>Add a Movie.</h2>
+
+  <form method="GET" action="<?php $_PHP_SELF ?>">
+    <b>Title:</b> <input type="text" name="title" class="text-input"/><br />
+    <b>Year:</b> <input type="number" name="year" class="text-input"/>
+    <br />
+    <b>MPAA rating:</b>
+    <select name="rating">
+      <option value="G">G</option>
+      <option value="NC-17">NC-17</option>
+      <option value="PG">PG</option>
+      <option value="PG-13">PG-13</option>
+      <option value="R">R</option>
+    </select><br />
+    <b>Company:</b> <input type="text" name="company" class="text-input"/>
+    <br />
+    <b>Genre:</b><br />
+    <input type="checkbox" name="genre[]" id="genre" value="Action" />Action
+    <input type="checkbox" name="genre[]" id="genre" value="Adult" />Adult
+    <input type="checkbox" name="genre[]" id="genre" value="Adventure" />Adventure
+    <input type="checkbox" name="genre[]" id="genre" value="Animation" />Animation
+    <input type="checkbox" name="genre[]" id="genre" value="Comedy" />Comedy
+    <input type="checkbox" name="genre[]" id="genre" value="Crime" />Crime
+    <input type="checkbox" name="genre[]" id="genre" value="Documentary" />Documentary
+    <input type="checkbox" name="genre[]" id="genre" value="Drama" />Drama
+    <input type="checkbox" name="genre[]" id="genre" value="Family" />Family<br />
+    <input type="checkbox" name="genre[]" id="genre" value="Fantasy" />Fantasy
+    <input type="checkbox" name="genre[]" id="genre" value="Horror" />Horror
+    <input type="checkbox" name="genre[]" id="genre" value="Nusical" />Musical
+    <input type="checkbox" name="genre[]" id="genre" value="Nystery" />Mystery
+    <input type="checkbox" name="genre[]" id="genre" value="Romance" />Romance
+    <input type="checkbox" name="genre[]" id="genre" value="Sci-fi" />Sci-Fi
+    <input type="checkbox" name="genre[]" id="genre" value="Short" />Short
+    <input type="checkbox" name="genre[]" id="genre" value="Thriller" />Thriller
+    <input type="checkbox" name="genre[]" id="genre" value="War" />War
+    <input type="checkbox" name="genre[]" id="genre" value="Western" />Western
+    <br /><br />
+    <input type="submit" value="Submit" class="button"/>
+  </form>
+</div>
 
 <?php
   function console_log( $data ){
