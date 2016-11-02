@@ -66,7 +66,7 @@
   }
 
   // Connect to db
-  $db = new mysqli('localhost', 'cs143', '', 'TEST');
+  $db = new mysqli('localhost', 'cs143', '', 'CS143');
   if($db->connect_errno > 0){
     die('Unable to connect to database [' . $db->connect_error . ']');
   }
@@ -87,7 +87,7 @@
     // Bind params to $_GET and such
     $rs = $statement->bind_param('isiss', $id, $_GET['title'], $_GET['year'], $_GET['rating'], $_GET['company']);
 
-    $test_execute = false;
+    $CS143_execute = false;
 
     // Execute statement
     if ($test_execute && $statement->execute()) {

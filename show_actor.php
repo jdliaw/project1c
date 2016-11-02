@@ -1,5 +1,11 @@
-<h1>Actor Information</h1>
-<p>by Jennifer Liaw (004454638) and Brandon Liu (004439799).</p>
+<link href="query.css" rel="stylesheet">
+
+<?php
+  include "navbar.php"
+?>
+
+<div class="container">
+    <h1>Actor Information</h1>
 
 <?php
     echo '<p>You looked up actor id: ' . $_GET["id"] . '</p>';
@@ -12,7 +18,7 @@
         if ($db->connect_errno > 0) {
             die('Unable to connect to database [' . $db->connect_error . ']');
         }
-        
+
         //Form query from actor ID
         $query = "SELECT first, last, sex, dob FROM Actor WHERE id='$search'";
 
@@ -106,9 +112,9 @@
             else {
                 //If last column, then it's the movie id. We can then link to the movie.'
                 if($i == 1) {
-                    echo "<td><a href='show_movie.php?id=$row[0]'>". $row[$i] ."</a></td>";   
+                    echo "<td><a href='show_movie.php?id=$row[0]'>". $row[$i] ."</a></td>";
                 }
-                else 
+                else
                     echo "<td>". $row[$i] ."</td>";
             }
         }
@@ -117,5 +123,7 @@
 
         echo "</table>";
     }
-    
+
 ?>
+
+</div>
