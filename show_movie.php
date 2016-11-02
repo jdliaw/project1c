@@ -61,7 +61,7 @@
 
         echo "<br /><a href='movie-review.php'><button class='button'>Add Review</button></a>";
 
-        $get_reviews = "SELECT * FROM Review WHERE mid=$_GET["id"]";
+        $get_reviews = "SELECT * FROM Review WHERE mid='$search'";
 
         echo "<table cellspacing=1 cellpadding=2>";
         $rs = $db->query($get_reviews);
