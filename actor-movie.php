@@ -2,7 +2,11 @@
   include "navbar.php";
 ?>
 
-<h2>Add Actor Roles in Movies</h2>
+<link href="add-record.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<div class="input">
+  <h2>Add Actor Roles in Movies</h2>
 
 <?php
   function console_log( $data ){
@@ -34,40 +38,42 @@
   $db->close();
 ?>
 
-<form method='GET' action="<?php $_PHP_SELF ?>">
-  Actor:
-    <select name="actor">
-      <option value=" "></option>
-      <?php
-        // Populate dropdown with existing actors
-        if ($actors_rs) {
-          // Echo each result as a select option
-          while ($row = $actors_rs->fetch_assoc()) {
-            echo "<option value='{$row["id"]}'>{$row['first']} {$row['last']} ({$row["dob"]})</option>";
+  <form method='GET' action="<?php $_PHP_SELF ?>">
+    <b>Actor:</b><br />
+      <select name="actor">
+        <option value=" "></option>
+        <?php
+          // Populate dropdown with existing actors
+          if ($actors_rs) {
+            // Echo each result as a select option
+            while ($row = $actors_rs->fetch_assoc()) {
+              echo "<option value='{$row["id"]}'>{$row['first']} {$row['last']} ({$row["dob"]})</option>";
+            }
           }
-        }
-        $actors_rs->free();
-      ?>
-    </select>
-  <br />
-  Movie:
-    <select name="movie">
-      <option value=" "></option>
-      <?php
-        // Populate dropdown with existing movies
-        if ($movies_rs) {
-          // Echo each result as a select option
-          while ($row = $movies_rs->fetch_assoc()) {
-            echo "<option value='{$row["id"]}'>{$row["title"]} ({$row["year"]})</option>";
+          $actors_rs->free();
+        ?>
+      </select>
+    <br />
+    <b>Movie:</b><br />
+      <select name="movie">
+        <option value=" "></option>
+        <?php
+          // Populate dropdown with existing movies
+          if ($movies_rs) {
+            // Echo each result as a select option
+            while ($row = $movies_rs->fetch_assoc()) {
+              echo "<option value='{$row["id"]}'>{$row["title"]} ({$row["year"]})</option>";
+            }
           }
-        }
-        $movies_rs->free();
-      ?>
-    </select>
-  <br />
-  Role: <input type="text" name="role" />
-  <input type="submit" value="Submit"/>
-</form>
+          $movies_rs->free();
+        ?>
+      </select>
+    <br />
+    <b>Role:</b><br />
+    <input type="text" name="role" class="text-input"/><br /><br />
+    <input type="submit" value="Submit" class="button"/>
+  </form>
+</div>
 
 <?php
   $required_present = true;

@@ -2,22 +2,28 @@
   include "navbar.php";
 ?>
 
-<h2>Add new Actor/Director</h2>
+<link href="add-record.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-<form method="GET" action="<?php $_PHP_SELF ?>">
-  Actor <input type="radio" name="table" value="Actor" />
-  Director <input type="radio" name="table" value="Director" />
-  <br />
-  First name: <input type="text" name="first" />
-  Last name: <input type="text" name="last" />
-  <br />
-  Male <input type="radio" name="sex" value="Male" />
-  Female <input type="radio" name="sex" value="Female" />
-  Date of birth: <input type="date" name="dob" />
-  Date of death: <input type="date" name="dod" />
-  <br /><br />
-  <input type="submit" value="Submit"/>
-</form>
+<div class="input">
+
+  <h2>Add new Actor/Director</h2>
+
+  <form method="GET" action="<?php $_PHP_SELF ?>">
+    Actor <input type="radio" name="table" value="Actor" />
+    Director <input type="radio" name="table" value="Director" /><br />
+    <b>First name:</b> <input type="text" name="first" class="text-input"/><br />
+    <b>Last name:</b> <input type="text" name="last" class="text-input"/><br />
+    Male <input type="radio" name="sex" value="Male" />
+    Female <input type="radio" name="sex" value="Female" />
+    <br />
+    <b>Date of birth:</b> <input type="date" name="dob" class="text-input"/><br />
+    <b>Date of death:</b> <input type="date" name="dod" class="text-input"/>
+    <br /><br />
+    <input class="button" type="submit" value="Submit"/>
+  </form>
+
+</div>
 
 <?php
   function console_log( $data ){
