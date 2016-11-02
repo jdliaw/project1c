@@ -1,4 +1,8 @@
-<h3>Add Actor Roles in Movies</h3>
+<?php
+  include "navbar.php";
+?>
+
+<h2>Add Actor Roles in Movies</h2>
 
 <?php
   function console_log( $data ){
