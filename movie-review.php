@@ -52,3 +52,51 @@
   <textarea name="comment" cols="60" rows="8"></textarea><br />
   <input type="submit" value="Submit"/>
 </form>
+
+<?php
+  $required_present = true;
+  // Check all required fields are entered
+  $check_array = array('name', 'movie', 'rating');
+  foreach($check_array as $key) {
+    if (!isset($_GET[$key])) {
+      // TODO: Some kind of error message if not all required fields entered.
+      $required_present = false;
+      break;
+    }
+  }
+
+  // Connect to db
+  $db = new mysqli('localhost', 'cs143', '', 'TEST');
+  if($db->connect_errno > 0){
+    die('Unable to connect to database [' . $db->connect_error . ']');
+  }
+  else {
+    console_log("connected to db");
+  }
+
+  // Execute statement if parameters present
+  if ($required_present) {
+    console_log('hello');
+
+    // Prepare INSERT statement
+    $statement = $db->prepare("INSERT INTO Review VALUES(?, ?, ?, ?, ?)");
+
+    // Get timestamp
+    $date = new DateTime();
+    $timestamp = date('Y-m-d H:i:s',$date->getTimestamp());
+    console_log($timestamp);
+
+    // Bind params to $_GET and such
+    $rs = $statement->bind_param('ssiis', $_GET['name'], $timestamp, $_GET['movie'], $_GET['rating'], $_GET['comment']);
+
+    $test_execute = true;
+
+    // Execute statement
+    if ($test_execute && $statement->execute()) {
+      console_log("Insert Review Success");
+    }
+    else {
+      console_log("Failed to insert to Review");
+    }
+  }
+?>
