@@ -9,6 +9,6 @@
     </div>
   </div>
   <div class="navitem right">
-    <a class="navbar" href="query.php">Search Actor/Movie</a>
+    <a class="navbar" href="search.php">Search Actor/Movie</a>
   </div>
 </nav>

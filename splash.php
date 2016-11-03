@@ -6,6 +6,6 @@
     Welcome to MoviePedia!<br />
     <hr>
     <button type="button" onclick="location.href='input.php'">Add a record</button>
-    <button type="button" onclick="location.href='query.php'">Browse</button>
+    <button type="button" onclick="location.href='search.php'">Browse</button>
   </div>
 </div>

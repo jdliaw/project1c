@@ -8,7 +8,6 @@
     <h2>Actor Information</h2>
 
 <?php
-    //echo '<p>You looked up actor id: ' . $_GET["id"] . '</p>';
     if($_GET["id"]) {
         $search = $_GET["id"];
         // Connect to database CS143 from localhost (u: cs143)
@@ -27,10 +26,6 @@
 
         // Run query
         $rs = $db->query($query);
-
-        // Get num of columns
-        $ncols = $rs->field_count;
-        $nrows = $rs->num_rows;
 
         // Get col names
         echo "<tr>"; // All col names go in one row
@@ -77,7 +72,6 @@
         echo "<h3>Movies this actor acted in:</h3>";
         echo "<table>";
 
-        //echo $query;
         // Run query
         $rs = $db->query($query);
 
@@ -86,36 +80,28 @@
         $nrows = $rs->num_rows;
 
         // Get col names
-        echo "<tr align='center'>"; // All col names go in one row
-
-        // //start i = 1 to skip the movie id.
-        // for ($i = 1; $i < $ncols; $i++) {
-        // $cinfo = $rs->fetch_field_direct($i);
-        // $cname = $cinfo->name;
-        // echo "<td><b>". $cname ."</b></td>";
-        // }
-        // echo "</tr>"; // Close col name row
-
+        echo "<tr>"; // All col names go in one row
         echo "<td><b>Movie Title</b></td>";
         echo "<td><b>" . $name . "'s Role</b></td>";
+        echo "</tr>";
 
         // Get returned data
         while ($row = $rs->fetch_row()) {
-        echo "<tr align='center'>";
-        for ($i = 1; $i < $ncols; $i++) {
-            if ($row[$i] == NULL) {
-            echo "<td>N/A</td>";
-            }
-            else {
-                //If last column, then it's the movie id. We can then link to the movie.'
-                if($i == 1) {
-                    echo "<td><a href='show_movie.php?id=$row[0]'>". $row[$i] ."</a></td>";
+            echo "<tr>";
+            for ($i = 1; $i < $ncols; $i++) {
+                if ($row[$i] == NULL) {
+                echo "<td>N/A</td>";
                 }
-                else
-                    echo "<td>". $row[$i] ."</td>";
+                else {
+                    //If last column, then it's the movie id. We can then link to the movie.'
+                    if($i == 1) {
+                        echo "<td><a href='show_movie.php?id=$row[0]'>". $row[$i] ."</a></td>";
+                    }
+                    else
+                        echo "<td>". $row[$i] ."</td>";
+                }
             }
-        }
-        echo "</tr>";
+            echo "</tr>";
         }
 
         echo "</table>";
@@ -124,3 +110,8 @@
 ?>
 
 </div>
+
+
+<?php
+    include 'query.php';
+?>

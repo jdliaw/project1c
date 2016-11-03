@@ -128,3 +128,7 @@
 
 ?>
 </div>
+
+<?php
+    include 'query.php';
+?>

@@ -1,9 +1,5 @@
 <link href="query.css" rel="stylesheet">
 
-<?php
-  include "navbar.php"
-?>
-
 <div class="container">
   <h2>Search</h2>
 
