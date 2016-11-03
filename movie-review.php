@@ -69,7 +69,6 @@
   $check_array = array('name', 'movie', 'rating');
   foreach($check_array as $key) {
     if (!isset($_GET[$key])) {
-      // TODO: Some kind of error message if not all required fields entered.
       $required_present = false;
       break;
     }

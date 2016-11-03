@@ -59,7 +59,6 @@
   $check_array = array('title', 'year', 'rating', 'company');
   foreach($check_array as $key) {
     if (!isset($_GET[$key])) {
-      // TODO: Some kind of error message if not all required fields entered.
       $required_present = false;
       break;
     }
@@ -76,6 +75,7 @@
 
   // Execute statement if parameters present
   if ($required_present) {
+    $valid = true;
     // Prepare INSERT statement
     $statement = $db->prepare("INSERT INTO Movie VALUES(?, ?, ?, ?, ?)");
 
@@ -87,8 +87,12 @@
     // Bind params to $_GET and such
     $rs = $statement->bind_param('isiss', $id, $_GET['title'], $_GET['year'], $_GET['rating'], $_GET['company']);
 
+    $year = $_GET['year'];
+    if (preg_match("^\d{4}$", $year) != 1)
+      $valid = false;
+
     // Execute statement
-    if ($statement->execute()) {
+    if ($valid && $statement->execute()) {
       console_log("Insert Movie Success");
       // Now update MaxMovieID
       $update_id = "UPDATE MaxMovieID SET id=$id";
@@ -98,6 +102,9 @@
     }
     else {
       console_log("Failed to insert to Movie");
+      echo '<script language="javascript">';
+      echo 'alert("Please enter a valid year.")';
+      echo '</script>';
     }
 
     // Insert into MovieGenre if genre specified

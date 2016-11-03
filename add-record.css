@@ -50,3 +50,8 @@ textarea {
   padding: 5px 15px;
   display: block;
 }
+
+.error {
+  font-weight: bold;
+  color: red;
+}

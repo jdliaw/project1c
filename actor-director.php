@@ -37,7 +37,6 @@
   $check_array = array('first', 'last', 'sex', 'dob');
   foreach($check_array as $key) {
     if (!isset($_GET[$key])) {
-      // TODO: Some kind of error message if not all required fields entered.
       $required_present = false;
       break;
     }
@@ -45,6 +44,7 @@
 
   // Execute statement if parameters present
   if ($required_present) {
+    $valid = true;
     // Connect to db
     $db = new mysqli('localhost', 'cs143', '', 'CS143');
     if($db->connect_errno > 0){
@@ -56,6 +56,8 @@
 
     // Date of death is not required. If alive, should have no input value and set as NULL.
     $dod = (isset($_GET["dod"])) ? $_GET["dod"] : null;
+    if ($dod && $dod < $dob) // Date of death should come after dob.
+      $valid = false;
     // Get next id from MaxPersonID
     $id_query = "SELECT id FROM MaxPersonID";
     $id = $db->query($id_query)->fetch_assoc()['id'] + 1;
@@ -72,7 +74,7 @@
     }
 
     // Execute statement
-    if ($statement->execute()) {
+    if ($valid && $statement->execute()) {
       console_log("Insert " . $_GET['table']. " Success");
       // Now update MaxPersonID
       $update_id = "UPDATE MaxPersonID SET id=$id";
@@ -80,7 +82,11 @@
       $rs = $db->query($update_id);
       console_log($rs);
     }
-    else
+    else {
       console_log("Failed to insert tuple");
+      echo '<script language="javascript">';
+      echo 'alert("Please enter valid birth and death dates.")';
+      echo '</script>';
+    }
   }
 ?>
