@@ -19,6 +19,28 @@
   color: #e5e5e5;
 }
 
+.bar .right {
+  display: inline-block;
+  font-size: 25px;
+  position: absolute;
+  padding-left: 10px;
+}
+
+.bar i {
+  color: #e5e5e5;
+  font-size: 30px;
+  margin: 5px 10px;
+}
+
+.search-bar {
+  display: inline-block;
+  width: 250px;
+  height: 25px;
+  border-radius: 3px;
+  border: #dbdbdb 0.5px solid;
+  background-color: white;
+}
+
 p {
   color: #e5e5e5;
   margin-bottom: 10px;

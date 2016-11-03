@@ -8,6 +8,11 @@
     <h1>Movie Information</h1>
 
 <?php
+    function console_log( $data ){
+        echo '<script>';
+        echo 'console.log('. json_encode( $data ) .')';
+        echo '</script>';
+      }
     //echo '<p>You looked up movie id: ' . $_GET["id"] . '</p>';
     if($_GET["id"]) {
         $search = $_GET["id"];
@@ -21,7 +26,7 @@
 
         //Form query from actor ID
         $query = "SELECT * FROM Movie m WHERE m.id='$search'";
-        $get_genres = "SELECT * FROM MovieGenre WHERE mid ='$search'";
+        $get_genres = "SELECT * FROM MovieGenre WHERE mid='$search'";
 
         echo "<h3>Movie details:</h3>";
         echo "<table>";
@@ -30,10 +35,22 @@
         $rs = $db->query($query);
         $rs_genres = $db->query($get_genres);
 
+        // Get movie director
+        $get_did = "SELECT did FROM MovieDirector WHERE mid='$search'";
+        $did = $db->query($get_did)->fetch_assoc()['did'];
+        console_log($did);
+        $get_director = "SELECT * FROM Director WHERE id='$did'";
+        $rs_director = $db->query($get_director);
+        while ($dir_row = $rs_director->fetch_assoc()) {
+            $d_first = $dir_row['first'];
+            $d_last = $dir_row['last'];
+        }
+
         // Get col names
         echo "<tr>"; // All col names go in one row
         echo "<td><b>Title</b></td>";
         echo "<td><b>Year</b></td>";
+        echo "<td><b>Director</b></td>";
         echo "<td><b>Rating</b></td>";
         echo "<td><b>Company</b></td>";
         echo "<td><b>Genre(s)</b></td>";
@@ -52,6 +69,12 @@
             echo "<tr>";
             echo "<td>". $title ."</td>";
             echo "<td>". $year ."</td>";
+            if ($d_first == NULL || $d_last == NULL) {
+                echo "<td>N/A</td>";
+            }
+            else {
+                echo "<td>". $d_first ." ". $d_last ."</td>";
+            }
             echo "<td>". $rating ."</td>";
             echo "<td>". $company ."</td>";
             echo "<td>";

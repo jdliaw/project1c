@@ -1,7 +1,4 @@
 <?php
-  include "navbar.php"
-?>
-
-<?php
-  include "query.php"
+  include 'navbar.php';
+  include 'query.php';
 ?>

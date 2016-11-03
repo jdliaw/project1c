@@ -71,10 +71,8 @@
       $rs = $statement->bind_param('isssss', $id, $_GET['first'], $_GET['last'], $_GET['dob'], $dod); // No sex for Director
     }
 
-    $test_execute = false;
-
     // Execute statement
-    if ($test_execute && $statement->execute()) {
+    if ($statement->execute()) {
       console_log("Insert " . $_GET['table']. " Success");
       // Now update MaxPersonID
       $update_id = "UPDATE MaxPersonID SET id=$id";

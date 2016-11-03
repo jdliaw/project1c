@@ -99,10 +99,8 @@
     // Bind params to $_GET and such
     $rs = $statement->bind_param('ssiis', $_GET['name'], $timestamp, $_GET['movie'], $_GET['rating'], $_GET['comment']);
 
-    $test_execute = true;
-
     // Execute statement
-    if ($test_execute && $statement->execute()) {
+    if ($statement->execute()) {
       console_log("Insert Review Success");
     }
     else {

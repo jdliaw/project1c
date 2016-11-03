@@ -101,10 +101,8 @@
     $statement = $db->prepare("INSERT INTO MovieDirector VALUES(?, ?)");
     $rs = $statement->bind_param("ii", $_GET['movie'], $_GET['director']);
 
-    $test_execute = false;
-
     // Execute statement
-    if ($test_execute && $statement->execute()) {
+    if ($statement->execute()) {
       console_log("Insert MovieDirector Success");
     }
     else {

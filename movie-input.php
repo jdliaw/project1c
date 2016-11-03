@@ -87,10 +87,8 @@
     // Bind params to $_GET and such
     $rs = $statement->bind_param('isiss', $id, $_GET['title'], $_GET['year'], $_GET['rating'], $_GET['company']);
 
-    $CS143_execute = false;
-
     // Execute statement
-    if ($test_execute && $statement->execute()) {
+    if ($statement->execute()) {
       console_log("Insert Movie Success");
       // Now update MaxMovieID
       $update_id = "UPDATE MaxMovieID SET id=$id";

@@ -104,10 +104,8 @@
     $statement = $db->prepare("INSERT INTO MovieActor VALUES(?, ?, ?)");
     $rs = $statement->bind_param("iis", $_GET['movie'], $_GET['actor'], $_GET['role']);
 
-    $test_execute = false;
-
     // Execute statement
-    if ($test_execute && $statement->execute()) {
+    if ($statement->execute()) {
       console_log("Insert MovieActor Success");
     }
     else {
