@@ -8,7 +8,7 @@
     <h1>Movie Information</h1>
 
 <?php
-    echo '<p>You looked up movie id: ' . $_GET["id"] . '</p>';
+    //echo '<p>You looked up movie id: ' . $_GET["id"] . '</p>';
     if($_GET["id"]) {
         $search = $_GET["id"];
         // Connect to database CS143 from localhost (u: cs143)
@@ -20,79 +20,72 @@
         }
 
         //Form query from actor ID
-        $query = "SELECT id, title, year, rating, company FROM Movie m WHERE m.id='$search'";
-
+        $query = "SELECT * FROM Movie m WHERE m.id='$search'";
+        $get_genres = "SELECT * FROM MovieGenre WHERE mid ='$search'";
 
         echo "<h3>Movie details:</h3>";
-        echo "<table cellspacing=1 cellpadding=2>";
+        echo "<table>";
 
-        //echo $query;
         // Run query
         $rs = $db->query($query);
-
-        // Get num of columns
-        $ncols = $rs->field_count;
-        $nrows = $rs->num_rows;
+        $rs_genres = $db->query($get_genres);
 
         // Get col names
-        echo "<tr align='center'>"; // All col names go in one row
-
-        for ($i = 0; $i < $ncols; $i++) {
-        $cinfo = $rs->fetch_field_direct($i);
-        $cname = $cinfo->name;
-        echo "<td><b>". $cname ."</b></td>";
-        }
+        echo "<tr>"; // All col names go in one row
+        echo "<td><b>Title</b></td>";
+        echo "<td><b>Year</b></td>";
+        echo "<td><b>Rating</b></td>";
+        echo "<td><b>Company</b></td>";
+        echo "<td><b>Genre(s)</b></td>";
         echo "</tr>"; // Close col name row
 
+        // Need genre and director.
+
         // Get returned data
-        while ($row = $rs->fetch_row()) {
-            echo "<tr align='center'>";
-            for ($i = 0; $i < $ncols; $i++) {
-                if ($row[$i] == NULL) {
-                    echo "<td>N/A</td>";
-                }
-                else {
-                    echo "<td>". $row[$i] ."</td>";
-                }
+        while ($row = $rs->fetch_assoc()) {
+            $id = $row['id'];
+            $title = $row['title'];
+            $year = $row['year'];
+            $rating = $row['rating'];
+            $company = $row['company'];
+
+            echo "<tr>";
+            echo "<td>". $title ."</td>";
+            echo "<td>". $year ."</td>";
+            echo "<td>". $rating ."</td>";
+            echo "<td>". $company ."</td>";
+            echo "<td>";
+            while ($gen_row = $rs_genres->fetch_assoc()) {
+                $genre = $gen_row['genre'];
+                echo $genre. ", ";
             }
+            echo "</td>";
             echo "</tr>";
+        }
+        echo "</table>";
+
+        $get_avgrating = "SELECT AVG(rating) FROM Review WHERE mid='$search'";
+        $rs = $db->query($get_avgrating);
+        echo "<h4>Average rating: ". $rs->fetch_row()[0] ." out of 5 stars</h4><hr>";
+
+        $get_reviews = "SELECT * FROM Review WHERE mid='$search'";
+
+        echo "<h3>Reviews:</h3>";
+        echo "<table class='review-table'>";
+        $rs = $db->query($get_reviews);
+
+        // Get returned data
+        while ($row = $rs->fetch_assoc()) {
+            $name = $row['name'];
+            $comment = $row['comment'];
+            $time = $row['time'];
+
+            echo "<tr id='review-comment'><td>". $comment ."</td></tr>";
+            echo "<tr id='review-info'><td id='name'>By ". $name ."<span id='time'>". $time ."</span></td></tr>";
         }
         echo "</table>";
 
         echo "<br /><a href='movie-review.php'><button class='button'>Add Review</button></a>";
-
-        $get_reviews = "SELECT * FROM Review WHERE mid='$search'";
-
-        echo "<table cellspacing=1 cellpadding=2>";
-        $rs = $db->query($get_reviews);
-
-        $ncols = $rs->field_count;
-        $nrows = $rs->num_rows;
-
-        // Get col names
-        echo "<tr align='center'>"; // All col names go in one row
-
-        for ($i = 0; $i < $ncols; $i++) {
-        $cinfo = $rs->fetch_field_direct($i);
-        $cname = $cinfo->name;
-        echo "<td><b>". $cname ."</b></td>";
-        }
-        echo "</tr>"; // Close col name row
-
-        // Get returned data
-        while ($row = $rs->fetch_row()) {
-            echo "<tr align='center'>";
-            for ($i = 0; $i < $ncols; $i++) {
-                if ($row[$i] == NULL) {
-                    echo "<td>N/A</td>";
-                }
-                else {
-                    echo "<td>". $row[$i] ."</td>";
-                }
-            }
-            echo "</tr>";
-        }
-        echo "</table>";
 
 
         /*
@@ -102,7 +95,7 @@
         $query = "SELECT DISTINCT aid, first, last, role FROM Movie m, MovieActor ma, Actor a WHERE ma.mid='$search' && a.id=ma.aid";
 
         echo "<h3>Actors in this movie:</h3>";
-        echo "<table border=1 cellspacing=1 cellpadding=2>";
+        echo "<table>";
 
         // Run query
         $rs = $db->query($query);
@@ -112,30 +105,22 @@
         $nrows = $rs->num_rows;
 
         // Get col names
-        echo "<tr align='center'>"; // All col names go in one row
+        echo "<tr>"; // All col names go in one row
 
-        echo "<td><b>Actor Name</b></td>";
-        echo "<td><b>Role in Movie</b></td>";
+        echo "<td><b>Name</b></td>";
+        echo "<td><b>Role</b></td>";
         echo "</tr>"; // Close col name row
 
         // Get returned data
-        while ($row = $rs->fetch_row()) {
-        echo "<tr align='center'>";
-        for ($i = 1; $i < $ncols; $i++) {
-            if ($row[$i] == NULL) {
-            echo "<td>N/A</td>";
-            }
-            else {
-                //If last column, then it's the movie id. We can then link to the movie.'
-                if($i == 1) {
-                    echo "<td><a href='show_actor.php?id=$row[0]'>". $row[$i] . " " . $row[$i+1] ."</a></td>";
-                    $i++;
-                }
-                else
-                    echo "<td>". $row[$i] ."</td>";
-            }
-        }
-        echo "</tr>";
+        while ($row = $rs->fetch_assoc()) {
+            $id = $row['aid'];
+            $first = $row['first'];
+            $last = $row['last'];
+            $role = $row['role'];
+            echo "<tr>";
+            echo "<td><a href='show_actor.php?id=$id'>". $first . " " . $last ."</a></td>";
+            echo "<td>". $role ."</td>";
+            echo "</tr>";
         }
 
         echo "</table>";

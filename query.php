@@ -20,9 +20,9 @@
     echo "<div class='container'>";
     // Get query from textarea
     $search = $_GET["search"];
-    echo "<p>Your search: ". $search ."</p>";
-    echo "<h3>Actors with this first or last name:</h3>";
-    echo "<table border=1 cellspacing=1 cellpadding=2>";
+    echo "<p>Your search: <b>". $search ."</b></p>";
+    echo "<h3>Actor results:</h3>";
+    echo "<table>";
 
     // Connect to database CS143 from localhost (u: cs143)
     $db = new mysqli('localhost', 'cs143', '', 'CS143');
@@ -40,48 +40,42 @@
     $queries = explode(" ", $search);
     //If the array size is 2, that means there are two spaces so we can handle as an AND relation.
     if(count($queries) == 2) {
-      $query = "SELECT id, first, last, dob FROM Actor WHERE (first LIKE '%$queries[0]%' AND last LIKE '%$queries[1]%') OR first LIKE '%$queries[1]%' AND last LIKE '%$queries[0]%'";
+      $query = "SELECT * FROM Actor WHERE (first LIKE '%$queries[0]%' AND last LIKE '%$queries[1]%') OR first LIKE '%$queries[1]%' AND last LIKE '%$queries[0]%'";
     }
     //Array size is 1, that means we can run a regular query. Alternatively, if it's greater than 2, then given our actors, we cannot have 2 space in a name.
     else {
-      $query = "SELECT id, first, last, dob FROM Actor WHERE first LIKE '%$search%' OR last LIKE '%$search%'";
+      $query = "SELECT * FROM Actor WHERE first LIKE '%$search%' OR last LIKE '%$search%'";
     }
 
     // Run query
     $rs = $db->query($query);
 
-    // Get num of columns
-    $ncols = $rs->field_count;
-    $nrows = $rs->num_rows;
-
     // Get col names
-    echo "<tr align='center'>"; // All col names go in one row
-
-    // for ($i = 0; $i < $ncols; $i++) {
-    //   $cinfo = $rs->fetch_field_direct($i);
-    //   $cname = $cinfo->name;
-    //   echo "<td><b>". $cname ."</b></td>";
-    // }
-    echo"<td><b>Actor Name</b></td>";
+    echo "<tr>"; // All col names go in one row
+    echo"<td><b>Name</b></td>";
+    echo"<td><b>Sex</b></td>";
     echo"<td><b>Date of Birth</b></td>";
-
-
+    echo"<td><b>Date of Death</b></td>";
     echo "</tr>"; // Close col name row
 
     // Get returned data
-    while ($row = $rs->fetch_row()) {
-      echo "<tr align='center'>";
-      for ($i = 1; $i < $ncols; $i++) {
-        if ($row[$i] == NULL) {
-          echo "<td>N/A</td>";
-        }
-        else if ($i == 1) {
-            echo "<td><a href='show_actor.php?id=$row[0]'>". $row[$i] . " " . $row[$i+1] ."</a></td>";
-            $i++;
-        }
-        else {
-          echo "<td>". $row[$i] ."</td>";
-        }
+    while ($row = $rs->fetch_assoc()) {
+      echo "<tr>";
+      $id = $row['id'];
+      $first = $row['first'];
+      $last = $row['last'];
+      $sex = $row['sex'];
+      $dob = $row['dob'];
+      $dod = $row['dod'];
+
+      echo "<td><a href='show_actor.php?id=$id'>". $first. " " . $last . "</a></td>";
+      echo "<td>". $sex ."</td>";
+      echo "<td>". $dob ."</td>";
+      if ($dod == NULL) {
+        echo "<td>N/A</td>";
+      }
+      else {
+        echo "<td>". $dod ."</td>";
       }
       echo "</tr>";
     }
@@ -92,41 +86,28 @@
     Now, we have to repeat the same steps for movie queries, except we don't have to bother with spaces being 'AND' relations.
     */
     //Do this query for movie titles
-    echo "<h3>Actors with this first or last name:</h3>";
-    echo "<table border=1 cellspacing=1 cellpadding=2>";
+    echo "<h3>Movie results:</h3>";
+    echo "<table>";
 
     $query = "SELECT id, title, year FROM Movie WHERE title LIKE '%$search%'";
     // Run query
     $rs = $db->query($query);
 
-    // Get num of columns
-    $ncols = $rs->field_count;
-    $nrows = $rs->num_rows;
-
     // Get col names
-    echo "<tr align='center'>"; // All col names go in one row
-
-    for ($i = 1; $i < $ncols; $i++) {
-      $cinfo = $rs->fetch_field_direct($i);
-      $cname = $cinfo->name;
-      echo "<td><b>". $cname ."</b></td>";
-    }
+    echo "<tr>"; // All col names go in one row
+    echo "<td><b>Title</b></td>";
+    echo "<td><b>Year</b></td>";
     echo "</tr>"; // Close col name row
 
     // Get returned data
-    while ($row = $rs->fetch_row()) {
-      echo "<tr align='center'>";
-      for ($i = 1; $i < $ncols; $i++) {
-        if ($row[$i] == NULL) {
-          echo "<td>N/A</td>";
-        }
-        else if($i == 1) {
-          echo"<td><a href='show_movie.php?id=$row[0]'>" . $row[$i] . " " . $row[$i+1] . "</a></td>";
-        }
-        else {
-          echo "<td>". $row[$i] ."</td>";
-        }
-      }
+    while ($row = $rs->fetch_assoc()) {
+      $id = $row['id'];
+      $title = $row['title'];
+      $year = $row['year'];
+
+      echo "<tr>";
+      echo "<td><a href='show_movie.php?id=$id'>". $title ."</td>";
+      echo "<td>". $year ."</td>";
       echo "</tr>";
     }
 

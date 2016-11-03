@@ -4,6 +4,13 @@
   margin: 5px 10px;
 }
 
+.home .right {
+  display: inline-block;
+  font-size: 25px;
+  position: absolute;
+  right: 10px;
+}
+
 .title {
   text-align: center;
   font-family: 'Lobster', cursive;

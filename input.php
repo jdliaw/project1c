@@ -4,6 +4,8 @@
 
 <div class="home">
   <a href="splash.php"><i class="fa fa-home" aria-hidden="true"></i></a>
+
+  <a href="query.php"><i class="fa fa-search right" aria-hidden="true"></i></a>
 </div>
 
 <div class="container">

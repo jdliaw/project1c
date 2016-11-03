@@ -1,4 +1,5 @@
 <link href="navbar.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 <nav>
   <div class="navitem left"> <a href="splash.php">Home</a></div>

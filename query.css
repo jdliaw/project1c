@@ -37,18 +37,52 @@ h2 {
 
 table {
   width: 100%;
-  border: #dbdbdb 0.5px solid;
+  border-top: #dbdbdb 0.5px solid;
+  border-left: #dbdbdb 0.5px solid;
   border-radius: 3px;
+}
+
+tr {
+  text-align: left;
 }
 
 td {
+  border-radius: 3px;
   border-bottom: #dbdbdb 0.5px solid;
   border-right: #dbdbdb 0.5px solid;
-  border-radius: 3px;
+  font-size: 15px;
+  padding: 5px;
 }
 
 td a {
-  text-decoration: none;
-  color: black;
-  text-align: left;
+  text-decoration: underline;
+  font-size: 15px;
+  color: #337db8;
+}
+
+.review-table {
+  border: 0;
+}
+
+#time {
+  /*display: inline-block;*/
+  float: right;
+}
+
+#review-info td {
+  border: 0;
+  border-top: #dbdbdb 0.5px solid;
+}
+
+#review-comment {
+  border: 0;
+}
+
+#review-comment tr {
+  border: #dbdbdb 0.5px solid;
+  border-bottom: 0;
+}
+
+#review-comment td{
+  border: 0;
 }

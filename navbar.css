@@ -2,6 +2,7 @@ nav {
   display: flex;
   justify-content: flex-end;
   background-color: black;
+  font-family: 'Montserrat', sans-serif;
   height: 80px;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f4ad42), to(#74008c));
 }
@@ -25,7 +26,6 @@ nav {
 a {
   color: #e5e5e5;
   font-size: 18px;
-  font-family: Helvetica;
   text-decoration: none;
 }
 .right {

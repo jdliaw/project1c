@@ -5,10 +5,10 @@
 ?>
 
 <div class="container">
-    <h1>Actor Information</h1>
+    <h2>Actor Information</h2>
 
 <?php
-    echo '<p>You looked up actor id: ' . $_GET["id"] . '</p>';
+    //echo '<p>You looked up actor id: ' . $_GET["id"] . '</p>';
     if($_GET["id"]) {
         $search = $_GET["id"];
         // Connect to database CS143 from localhost (u: cs143)
@@ -20,10 +20,10 @@
         }
 
         //Form query from actor ID
-        $query = "SELECT first, last, sex, dob FROM Actor WHERE id='$search'";
+        $query = "SELECT * FROM Actor WHERE id='$search'";
 
-        echo "<h3>Here is some info about this actor:</h3>";
-        echo "<table border=1 cellspacing=1 cellpadding=2>";
+        echo "<h3>Actor details:</h3>";
+        echo "<table>";
 
         // Run query
         $rs = $db->query($query);
@@ -33,39 +33,36 @@
         $nrows = $rs->num_rows;
 
         // Get col names
-        echo "<tr align='center'>"; // All col names go in one row
-
-        for ($i = 0; $i < $ncols; $i++) {
-            if($i == 0) {
-                echo "<td><b>Actor Name</b></td>";
-                $i++;
-            }
-            else {
-                $cinfo = $rs->fetch_field_direct($i);
-                $cname = $cinfo->name;
-                echo "<td><b>". $cname ."</b></td>";
-            }
-        }
+        echo "<tr>"; // All col names go in one row
+        echo"<td><b>Name</b></td>";
+        echo"<td><b>Sex</b></td>";
+        echo"<td><b>Date of Birth</b></td>";
+        echo"<td><b>Date of Death</b></td>";
         echo "</tr>"; // Close col name row
 
         $name = "";
         // Get returned data
-        while ($row = $rs->fetch_row()) {
-            echo "<tr align='center'>";
-            for ($i = 0; $i < $ncols; $i++) {
-                if ($row[$i] == NULL) {
-                    echo "<td>N/A</td>";
-                }
-                else if($i == 0) {
-                    $name = $row[$i] . " " . $row[$i + 1];
-                    echo "<td>". $row[$i] . " " . $row[$i + 1] ."</td>";
-                    $i++;
-                }
-                else {
-                    echo "<td>". $row[$i] ."</td>";
-                }
-            }
-            echo "</tr>";
+        while ($row = $rs->fetch_assoc()) {
+          echo "<tr>";
+          $id = $row['id'];
+          $first = $row['first'];
+          $last = $row['last'];
+          $sex = $row['sex'];
+          $dob = $row['dob'];
+          $dod = $row['dod'];
+
+          $name = $first . " " . $last;
+
+          echo "<td><a href='show_actor.php?id=$id'>". $first. " " . $last . "</a></td>";
+          echo "<td>". $sex ."</td>";
+          echo "<td>". $dob ."</td>";
+          if ($dod == NULL) {
+            echo "<td>N/A</td>";
+          }
+          else {
+            echo "<td>". $dod ."</td>";
+          }
+          echo "</tr>";
         }
 
         echo "</table>";
@@ -77,8 +74,8 @@
         //Form query from actor ID
         $query = "SELECT DISTINCT mid, title, role FROM Movie m, MovieActor ma WHERE ma.aid='$search' && m.id=ma.mid";
 
-        echo "<h3>Movies that this actor has acted in:</h3>";
-        echo "<table border=1 cellspacing=1 cellpadding=2>";
+        echo "<h3>Movies this actor acted in:</h3>";
+        echo "<table>";
 
         //echo $query;
         // Run query
